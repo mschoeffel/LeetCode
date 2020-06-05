@@ -1,4 +1,4 @@
-#Two Sum
+# Two Sum
 `easy`
 
 Given an array of integers, return **indices** of the two numbers such that they add up to a specific target.
@@ -13,20 +13,20 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 ```
 
-##Starting Point
+## Starting Point
 ```go
 func twoSum(nums []int, target int) []int {
     //Your code here.
 }
 ```
 
-###Contributor
+### Contributor
 LeetCode
 
-###Related Topics
+### Related Topics
 `Array` `Hash Table`
 
-###Similar Questions
+### Similar Questions
 
 Question|Difficulty
 ----|----
@@ -38,14 +38,14 @@ Subarray Sum Equals K|`Medium`
 Two Sum IV - Input is a BST|`Easy`
 Two Sum Less Than K|`Easy`
 
-##Hint 1
+## Hint 1
 A really brute force way would be to search for all possible pairs of numbers but that would be too slow. Again, it's best to try out brute force solutions for just for completeness. It is from these brute force solutions that you can come up with optimizations.
 
-##Hint 2
+## Hint 2
 So, if we fix one of the numbers, say `x`, we have to scan the entire array to find the next number `y` which is `value - x`
 where value is the input parameter. 
 
 Can we change our array somehow so that this search becomes faster?
 
-##Hint 3
+## Hint 3
 The second train of thought is, without changing the array, can we use additional space somehow? Like maybe a hash map to speed up the search?
