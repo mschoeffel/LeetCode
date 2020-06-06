@@ -24,13 +24,24 @@ func TestApp(t *testing.T) {
 	}
 
 	for index, element := range testSets {
-		t.Run("Test: "+strconv.Itoa(index)+"_"+element.comment,
-			func(t *testing.T) { testApp(element.s, element.expected, index, t) })
+		t.Run("Test BruteForce: "+strconv.Itoa(index)+"_"+element.comment,
+			func(t *testing.T) { testAppBruteForce(element.s, element.expected, index, t) })
+		t.Run("Test SaveStart: "+strconv.Itoa(index)+"_"+element.comment,
+			func(t *testing.T) { testAppSaveStart(element.s, element.expected, index, t) })
 	}
 }
 
-func testApp(s string, expected int, index int, t *testing.T) {
-	actual := lengthOfLongestSubstring(s)
+func testAppBruteForce(s string, expected int, index int, t *testing.T) {
+	actual := lengthOfLongestSubstringBruteForce(s)
+	if actual != expected {
+		t.Errorf("Error at Testset: " + strconv.Itoa(index) +
+			" Expected: [" + strconv.Itoa(expected) +
+			"] Actual: [" + strconv.Itoa(actual) + "]")
+	}
+}
+
+func testAppSaveStart(s string, expected int, index int, t *testing.T) {
+	actual := lengthOfLongestSubstringSaveStart(s)
 	if actual != expected {
 		t.Errorf("Error at Testset: " + strconv.Itoa(index) +
 			" Expected: [" + strconv.Itoa(expected) +
@@ -52,12 +63,21 @@ func BenchmarkApp1(b *testing.B) {
 
 	for index, element := range benchmarkSets {
 		b.Run("Benchmark BruteForce: "+strconv.Itoa(index)+"_"+element.comment,
-			func(b *testing.B) { benchmarkApp(element.s, b) })
+			func(b *testing.B) { benchmarkAppBruteForce(element.s, b) })
+
+		b.Run("Benchmark SaveStart: "+strconv.Itoa(index)+"_"+element.comment,
+			func(b *testing.B) { benchmarkAppBruteForce(element.s, b) })
 	}
 }
 
-func benchmarkApp(s string, b *testing.B) {
+func benchmarkAppBruteForce(s string, b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_ = lengthOfLongestSubstring(s)
+		_ = lengthOfLongestSubstringBruteForce(s)
+	}
+}
+
+func benchmarkAppSaveStart(s string, b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = lengthOfLongestSubstringSaveStart(s)
 	}
 }
